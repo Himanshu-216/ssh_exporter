@@ -16,7 +16,8 @@ func UpdateLoginsToday() {
 	count := 0
 
 	for _, line := range lines {
-		if strings.Contains(line, "ssh") && strings.Contains(line, today) {
+		// pts/ indicates a pseudo-terminal, typically used by SSH sessions
+		if strings.Contains(line, "pts/") && strings.Contains(line, today) {
 			count++
 		}
 	}

@@ -17,11 +17,12 @@ func main() {
 			metrics.UpdateSSHConnections()
 			metrics.UpdateLoginsToday()
 			metrics.UpdateLastLoginTimes()
-			time.Sleep(15 * time.Second)
+			metrics.UpdateFailedLogins() 
+			time.Sleep(5 * time.Second)
 		}
 	}()
 
-	fmt.Println("Starting SSH Exporter on :2112")
+	fmt.Println("Starting SSH Exporter on :9898")
 	http.Handle("/metrics", promhttp.Handler())
-	http.ListenAndServe(":2112", nil)
+	http.ListenAndServe(":9898", nil)
 }

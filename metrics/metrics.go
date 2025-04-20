@@ -28,6 +28,13 @@ var (
 		},
 		[]string{"user"},
 	)
+
+	SSHFailedLoginsToday = prometheus.NewGauge(prometheus.GaugeOpts{
+		Name: "ssh_failed_logins_today_total",
+		Help: "Number of failed SSH login attempts today",
+	})
+
+
 )
 
 func RegisterMetrics() {
@@ -35,4 +42,5 @@ func RegisterMetrics() {
 	prometheus.MustRegister(SSHConnectionsByUser)
 	prometheus.MustRegister(SSHLoginsToday)
 	prometheus.MustRegister(LastLoginTime)
+	prometheus.MustRegister(SSHFailedLoginsToday)
 }
