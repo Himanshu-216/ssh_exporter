@@ -1,4 +1,4 @@
-module ssh_exporter
+module github.com/Himanshu-216/ssh_exporter
 
 go 1.24.2
 

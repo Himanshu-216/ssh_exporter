@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"ssh_exporter/metrics"
+	"github.com/Himanshu-216/ssh_exporter/metrics"
 )
 
 func main() {
