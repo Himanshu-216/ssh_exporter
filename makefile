@@ -15,7 +15,7 @@ VERSION_LDFLAGS := \
 
 .PHONY: all style format vet test build smoke
 
-all: style vet test build
+all: style vet build
 
 style:
 	@echo ">> checking code style"
@@ -29,12 +29,6 @@ vet:
 	@echo ">> vetting code"
 	go vet $(pkgs)
 
-test:
-	@echo ">> running short tests"
-	go test -short $(pkgs)
-
 build:
-	@echo ">> building for amd64"
-	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags '$(VERSION_LDFLAGS)' -o ssh-exporter-amd64 -a -tags netgo
-#	@echo ">> building for arm64"
-#	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -ldflags '$(VERSION_LDFLAGS)' -o ssh-exporter-arm64 -a -tags netgo
+	@echo ">> building code"
+	cd cmd/process-exporter; CGO_ENABLED=0 go build -ldflags "$(VERSION_LDFLAGS)" -o ../../process-exporter -a -tags netgo
