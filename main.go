@@ -2,11 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/Himanshu-216/ssh_exporter/metrics"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"net/http"
 	"time"
-
-	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"github.com/Himanshu-216/ssh_exporter/metrics"
 )
 
 func main() {
@@ -17,7 +16,7 @@ func main() {
 			metrics.UpdateSSHConnections()
 			metrics.UpdateLoginsToday()
 			metrics.UpdateLastLoginTimes()
-			metrics.UpdateFailedLogins() 
+			metrics.UpdateFailedLogins()
 			time.Sleep(5 * time.Second)
 		}
 	}()

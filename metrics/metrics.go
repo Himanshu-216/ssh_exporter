@@ -33,8 +33,6 @@ var (
 		Name: "ssh_failed_logins_today_total",
 		Help: "Number of failed SSH login attempts today",
 	})
-
-
 )
 
 func RegisterMetrics() {
