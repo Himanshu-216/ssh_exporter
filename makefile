@@ -15,7 +15,7 @@ VERSION_LDFLAGS := \
 
 .PHONY: all style format vet test build smoke
 
-all: style vet build
+all: style forat vet build
 
 style:
 	@echo ">> checking code style"
@@ -31,4 +31,4 @@ vet:
 
 build:
 	@echo ">> building code"
-	cd cmd/process-exporter; CGO_ENABLED=0 go build -ldflags "$(VERSION_LDFLAGS)" -o ../../process-exporter -a -tags netgo
+	CGO_ENABLED=0 go build -ldflags "$(VERSION_LDFLAGS)" -o ../../process-exporter -a -tags netgo
