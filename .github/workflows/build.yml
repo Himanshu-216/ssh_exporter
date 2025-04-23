@@ -1,18 +1,18 @@
-# on: [push]
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: setup Go
-#         uses: actions/setup-go@v2
-#         with:
-#           go-version: '1.24.2'
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.24.2'
 
-#       - uses: actions/checkout@v4
-#         with:
-#           fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-#       - run: make style
-#       - run: make format
-#       - run: make vet
-#       - run: make build
+      - run: make style
+      - run: make format
+      - run: make vet
+      - run: make build
