@@ -22,7 +22,7 @@ jobs:
 
       - run: make test
 
-      - name: Run GoReleaser
+      - name: Run GoReleaser for release
         uses: goreleaser/goreleaser-action@v5
         with:
           distribution: goreleaser
