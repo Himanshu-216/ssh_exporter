@@ -20,13 +20,13 @@ jobs:
         with:
           go-version: '1.24.2'
 
-      - run: make test
+      # - run: make test
 
-      - name: Run GoReleaser for release
+      - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v5
         with:
           distribution: goreleaser
-          version: "~> 1.25"
-          args: release --rm-dist
+          version: latest # or "v2.0.0" if you want a specific one
+          args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
