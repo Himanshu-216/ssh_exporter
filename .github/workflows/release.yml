@@ -2,6 +2,8 @@ on:
   push:
     tags:
       - v[0-9].*
+    branches:
+      - master
 
 permissions:
   contents: write
@@ -26,7 +28,7 @@ jobs:
         uses: goreleaser/goreleaser-action@v5
         with:
           distribution: goreleaser
-          version: latest # or "v2.0.0" if you want a specific one
+          version: 1 # or "v2.0.0" if you want a specific one
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
