@@ -19,4 +19,4 @@ This exporter collects and exposes the following SSH-related metrics:
 Download the precompiled binary for your platform from the [Releases](https://github.com/Himanshu-216/ssh_exporter/releases) page, or build from source:
 
 ```bash
-go build -o ssh-exporter main.go
+GOOS=<os_name> GOARCH=<arch> go build -o ssh-exporter main.go
