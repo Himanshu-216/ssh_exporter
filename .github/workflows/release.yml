@@ -25,10 +25,12 @@ jobs:
       # - run: make test
 
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v5
+        uses: goreleaser/goreleaser-action@v6
         with:
+          # either 'goreleaser' (default) or 'goreleaser-pro'
           distribution: goreleaser
-          version: 1 # or "v2.0.0" if you want a specific one
+          # 'latest', 'nightly', or a semver
+          version: '~> v2'
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
