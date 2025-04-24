@@ -32,7 +32,7 @@ archives:
     - goos: windows
       formats: ["zip"]
     - goos: linux
-      formats: ["tar.gz"]
+      formats: ["tar.gz", "zip"]
 
 checksum:
   name_template: checksums.txt
