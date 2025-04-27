@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [master, feat/docker-image]
+    branches: [master]
     tags: ['v*']
   pull_request:
 
