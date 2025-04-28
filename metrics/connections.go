@@ -43,10 +43,11 @@ func UpdateSSHConnections() {
 		fp := getFingerprintFromAuthLog(username)
 		if fp != "" {
 			// Map fingerprint to comment (i.e., user name or other useful info)
-			label := fp
+			label := username + " (" + fp + ")"
 			if comment, ok := fingerprintLabelMap[fp]; ok {
-				label = comment // Use the comment if fingerprint matches
+				label = username + " (" + comment + ")"
 			}
+
 
 			// Increment connection count for this fingerprint (based on comment)
 			fingerprintCounts[label]++
@@ -61,7 +62,6 @@ func UpdateSSHConnections() {
 	}
 	for label, c := range fingerprintCounts {
 		SSHConnectionsByFingerprint.WithLabelValues(label).Set(float64(c))
-		print(SSHConnectionsByFingerprint)
 	}
 }
 
