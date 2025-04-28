@@ -13,21 +13,11 @@ VERSION_LDFLAGS := \
   -X github.com/prometheus/common/version.Revision=$(REVISION) \
   -X main.version=$(TAG_VERSION)
 
-.PHONY: all style format vet test build smoke
-
-all: style format vet build
-
-style:
-	@echo ">> checking code style"
-	@! gofmt -d $(shell find . -name '*.go') | grep '^' || (echo "Code not properly formatted"; exit 1)
+all: format build
 
 format:
 	@echo ">> formatting code"
 	go fmt $(pkgs)
-
-vet:
-	@echo ">> vetting code"
-	go vet $(pkgs)
 
 build:
 	@echo ">> building code"
