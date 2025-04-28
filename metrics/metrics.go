@@ -33,6 +33,14 @@ var (
 		Name: "ssh_failed_logins_today_total",
 		Help: "Number of failed SSH login attempts today",
 	})
+
+	SSHConnectionsByFingerprint = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name: "ssh_connections_by_fingerprint",
+			Help: "SSH connection count by fingerprint",
+		},
+		[]string{"fingerprint"},
+	)
 )
 
 func RegisterMetrics() {
@@ -41,4 +49,5 @@ func RegisterMetrics() {
 	prometheus.MustRegister(SSHLoginsToday)
 	prometheus.MustRegister(LastLoginTime)
 	prometheus.MustRegister(SSHFailedLoginsToday)
+	prometheus.MustRegister(SSHConnectionsByFingerprint)
 }
