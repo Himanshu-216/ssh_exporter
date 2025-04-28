@@ -26,7 +26,6 @@ func UpdateSSHConnections() {
 	// Map: fingerprint => comment (usually the actual user's name/email at the end of the pub key)
 	fingerprintLabelMap := getAllUserAuthorizedKeyFingerprints()
 
-
 	// Parsing "who" output for active sessions
 	lines := strings.Split(string(out), "\n")
 	for _, line := range lines {
@@ -48,12 +47,10 @@ func UpdateSSHConnections() {
 				label = username + " (" + comment + ")"
 			}
 
-
 			// Increment connection count for this fingerprint (based on comment)
 			fingerprintCounts[label]++
 		}
 	}
-	
 
 	// Update the total SSH connections
 	SSHConnections.Set(float64(totalCount))
@@ -64,7 +61,6 @@ func UpdateSSHConnections() {
 		SSHConnectionsByFingerprint.WithLabelValues(label).Set(float64(c))
 	}
 }
-
 
 // Parses all authorized_keys files and returns map[fingerprint] = key_comment
 func getAllUserAuthorizedKeyFingerprints() map[string]string {
@@ -111,13 +107,12 @@ func fingerprintOfKey(keyLine string) (string, string) {
 	}
 	fields := strings.Fields(string(out))
 	if len(fields) >= 3 {
-		fingerprint := fields[1]        // e.g., SHA256:xxxxx
+		fingerprint := fields[1]                 // e.g., SHA256:xxxxx
 		comment := strings.Join(fields[2:], " ") // In case comment has spaces
 		return fingerprint, comment
 	}
 	return "", ""
 }
-
 
 // Parses recent SSHD logs to find fingerprint used by a user
 func getFingerprintFromAuthLog(username string) string {
@@ -136,4 +131,3 @@ func getFingerprintFromAuthLog(username string) string {
 	}
 	return ""
 }
-

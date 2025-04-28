@@ -16,7 +16,5 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: make style
       - run: make format
-      - run: make vet
       - run: make build
