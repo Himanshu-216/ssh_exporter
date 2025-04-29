@@ -1,22 +1,61 @@
-# SSH Exporter
+# SSH Exporter for Prometheus
 
-A Prometheus exporter that exposes SSH session and login metrics for monitoring SSH activity on your Linux servers.
+This SSH Exporter provides Prometheus-compatible metrics to track SSH activity on your server. It includes metrics such as the number of active SSH sessions, active sessions per user, login attempts, and more. This exporter is designed to help monitor SSH usage, failed login attempts, and user activity, which can be used to create alerts and perform analysis on your server's SSH activity.
 
 ## Features
 
-This exporter collects and exposes the following SSH-related metrics:
+- **Active SSH Sessions**: Tracks the number of active SSH sessions on the server.
+- **Sessions by User**: Tracks the number of active SSH sessions per user.
+- **SSH Logins Today**: Tracks the number of SSH logins that have occurred today.
+- **Last Login Time**: Provides the last login time for each user (in Unix timestamp).
+- **Failed Logins Today**: Tracks the number of failed SSH login attempts today.
+- **Connections by Fingerprint**: Tracks the number of active SSH sessions by SSH key fingerprint.
 
-- `ssh_active_sessions`: Number of active SSH sessions.
-- `ssh_active_sessions_by_user{user}`: Number of active SSH sessions by each user.
-- `ssh_logins_today`: Number of successful SSH logins today.
-- `ssh_user_last_login{user}`: Last login time per user (Unix timestamp).
-- `ssh_failed_logins_today_total`: Number of failed SSH login attempts today.
+You can use these Prometheus queries to visualize and alert on SSH activity.
 
-## Getting Started
+- **Total active SSH sessions**:
 
-### Installation
+    ```promQL
+    ssh_active_sessions
+    ```
 
-Download the precompiled binary for your platform from the [Releases](https://github.com/Himanshu-216/ssh_exporter/releases) page, or build from source:
+- **Active sessions by user**:
 
-```bash
-GOOS=<os_name> GOARCH=<arch> go build -o ssh-exporter main.go
+    ```promQL
+    ssh_active_sessions_by_user
+    ```
+
+- **Logins today**:
+
+    ```promQL
+    ssh_logins_today
+    ```
+
+- **Last login time for a user**:
+
+    ```promQL
+    ssh_user_last_login{user="username"}
+    ```
+
+- **Failed logins today**:
+
+    ```promQL
+    ssh_failed_logins_today_total
+    ```
+
+- **Active sessions by fingerprint**:
+
+    ```promQL
+    ssh_connections_by_fingerprint
+    ```
+
+## Contributing
+
+Feel free to open an issue or submit a pull request if you find any bugs or have suggestions for new features.
+
+## Releases
+
+You can download the latest release of the SSH Exporter from the [Releases](https://github.com/Himanshu-216/ssh_exporter/releases) page on GitHub.
+
+- [Latest Release](https://github.com/Himanshu-216/ssh_exporter/releases/latest)
+

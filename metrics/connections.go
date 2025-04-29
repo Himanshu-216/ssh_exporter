@@ -1,8 +1,6 @@
 package metrics
 
 import (
-	// "fmt"
-	// "log"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -44,6 +42,7 @@ func UpdateSSHConnections() {
 			// Map fingerprint to comment (i.e., user name or other useful info)
 			label := username + " (" + fp + ")"
 			if comment, ok := fingerprintLabelMap[fp]; ok {
+				// Set label to include the username and the fingerprint's comment
 				label = username + " (" + comment + ")"
 			}
 
