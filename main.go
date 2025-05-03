@@ -16,7 +16,7 @@ func main() {
 			metrics.UpdateSSHConnections()
 			metrics.UpdateLoginsToday()
 			metrics.UpdateLastLoginTimes()
-			metrics.UpdateFailedLogins()
+			metrics.LoginsmonitorwithIP()
 			time.Sleep(5 * time.Second)
 		}
 	}()
