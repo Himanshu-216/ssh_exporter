@@ -16,7 +16,8 @@ docker run -d --rm -p 9898:9898 himanshu162pnt723/ssh_exporter
 - **Sessions by User**: Tracks the number of active SSH sessions per user.
 - **SSH Logins Today**: Tracks the number of SSH logins that have occurred today.
 - **Last Login Time**: Provides the last login time for each user (in Unix timestamp).
-- **Failed Logins Today**: Tracks the number of failed SSH login attempts today.
+- **Failed Logins by IP**: Tracks failed SSH login attempts by source IP address.
+- **Successful Logins by IP**: Tracks successful SSH login attempts by source IP address.
 - **Connections by Fingerprint**: Tracks the number of active SSH sessions by SSH key fingerprint.
 
 You can use these Prometheus queries to visualize and alert on SSH activity.
@@ -48,7 +49,13 @@ You can use these Prometheus queries to visualize and alert on SSH activity.
 - **Failed logins today**:
 
     ```promQL
-    ssh_failed_logins_today_total
+    SSHFailedLoginsByIP
+    ```
+
+- **Successful logins today**:
+
+    ```promQL
+    SSHSuccessfulLoginsByIP
     ```
 
 - **Active sessions by fingerprint**:
@@ -66,6 +73,7 @@ Feel free to open an issue or submit a pull request if you find any bugs or have
 You can download the latest release of the SSH Exporter from the [Releases](https://github.com/Himanshu-216/ssh_exporter/releases) page on GitHub.
 
 - [Latest Release](https://github.com/Himanshu-216/ssh_exporter/releases/latest)
+
 
 
 
