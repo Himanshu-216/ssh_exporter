@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/Himanshu-216/ssh_exporter/metrics"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -9,6 +10,10 @@ import (
 )
 
 func main() {
+	port := flag.String("web.listen-address", "9898", "Port on which to expose metrics and web interface (without ':')")
+	flag.Parse()
+	address := ":" + *port
+
 	metrics.RegisterMetrics()
 
 	go func() {
@@ -21,7 +26,7 @@ func main() {
 		}
 	}()
 
-	fmt.Println("Starting SSH Exporter on :9898")
+	fmt.Printf("Starting SSH Exporter on %s\n", address)
 	http.Handle("/metrics", promhttp.Handler())
-	http.ListenAndServe(":9898", nil)
+	http.ListenAndServe(address, nil)
 }
