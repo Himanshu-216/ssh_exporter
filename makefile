@@ -11,7 +11,7 @@ VERSION_LDFLAGS := \
   -X github.com/prometheus/common/version.BuildDate=$(BUILDDATE) \
   -X github.com/prometheus/common/version.BuildUser=$(BUILDUSER) \
   -X github.com/prometheus/common/version.Revision=$(REVISION) \
-  -X main.version=$(TAG_VERSION)
+  -X github.com/prometheus/common/version.Version=$(TAG_VERSION) \
 
 all: format build
 
@@ -21,5 +21,5 @@ format:
 
 build:
 	@echo ">> building code"
-	CGO_ENABLED=0 go build -ldflags "$(VERSION_LDFLAGS)" -o ssh_exporter -a 
+	CGO_ENABLED=0 go build -ldflags "$(VERSION_LDFLAGS)" -o bin/ssh_exporter -a 
 
