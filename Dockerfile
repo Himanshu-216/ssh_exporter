@@ -13,6 +13,6 @@ FROM scratch
 COPY --from=build /app/bin/ssh_exporter .
 
 
-ENTRYPOINT ["/bin/ssh_exporter"]
+ENTRYPOINT ["/ssh_exporter"]
 
 EXPOSE 9898
