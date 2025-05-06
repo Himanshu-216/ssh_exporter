@@ -10,7 +10,7 @@ RUN GOARCH=$TARGETARCH make build
 # RUN ls /go/src/github.com/Himanshu-216
 FROM scratch
 
-COPY --from=build /app/ssh_exporter .
+COPY --from=build /app/bin/ssh_exporter .
 
 
 ENTRYPOINT ["/ssh_exporter"]
