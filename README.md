@@ -2,13 +2,23 @@
 
 This SSH Exporter provides Prometheus-compatible metrics to track SSH activity on your server. It includes metrics such as the number of active SSH sessions, active sessions per user, login attempts, and more. This exporter is designed to help monitor SSH usage, failed login attempts, and user activity, which can be used to create alerts and perform analysis on your server's SSH activity.
 
-## How to Run
+## How to Run Binary
+
+```bash
+make build
+```
+
+```bash
+./bin/ssh_exporter --web.listen-address="0.0.0.0:9898"
+```
+
+## How to Run with Docker
 
 ```bash
 docker pull himanshu162pnt723/ssh_exporter
 ```
 ```bash
-docker run -d --rm -p 9898:9898 himanshu162pnt723/ssh_exporter
+docker run --privileged -d --rm -p 9898:9898 himanshu162pnt723/ssh_exporter
 ```
 ## Features
 
