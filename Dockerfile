@@ -8,10 +8,9 @@ ADD . .
 
 RUN GOARCH=$TARGETARCH make build
 # RUN ls /go/src/github.com/Himanshu-216
-FROM scratch
+FROM debian:bookworm-slim
 
-COPY --from=build /app/bin/ssh_exporter .
-
+COPY --from=build /app/bin/ssh_exporter /ssh_exporter
 
 ENTRYPOINT ["/ssh_exporter"]
 

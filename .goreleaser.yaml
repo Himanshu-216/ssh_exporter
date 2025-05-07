@@ -8,7 +8,7 @@ before:
 builds:
   - id: ssh_exporter
     main: main.go
-    binary: ssh-exporter
+    binary: ssh_exporter
     env:
       - CGO_ENABLED=0
     goos:
