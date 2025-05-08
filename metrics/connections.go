@@ -5,6 +5,8 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strings"
+	"time"
+	"fmt"
 )
 
 // Update the SSH connection counts based on the logs and fingerprints
@@ -115,18 +117,45 @@ func fingerprintOfKey(keyLine string) (string, string) {
 
 // Parses recent SSHD logs to find fingerprint used by a user
 func getFingerprintFromAuthLog(username string) string {
-	logOutput, err := exec.Command("journalctl", "_COMM=sshd", "--since=1 hour ago", "-g", "Accepted publickey").Output()
+	logData, err := os.ReadFile("/var/log/auth.log")
 	if err != nil {
 		return ""
 	}
-	lines := strings.Split(string(logOutput), "\n")
+
+	lines := strings.Split(string(logData), "\n")
+	oneHourAgo := time.Now().Add(-1 * time.Hour)
+	currentYear := time.Now().Year()
+
 	for _, line := range lines {
-		if strings.Contains(line, username) && strings.Contains(line, "SHA256:") {
-			parts := strings.Split(line, "SHA256:")
-			if len(parts) > 1 {
-				return "SHA256:" + strings.Fields(parts[1])[0]
-			}
+		if !strings.Contains(line, "Accepted publickey") || !strings.Contains(line, username) || !strings.Contains(line, "SHA256:") {
+			continue
+		}
+
+		fields := strings.Fields(line)
+		if len(fields) < 3 {
+			continue
+		}
+
+		var timestamp time.Time
+		var err1, err2 error
+
+		// Try RFC3339 first
+		timestamp, err1 = time.Parse(time.RFC3339, fields[0])
+		if err1 != nil {
+			// Fallback to syslog style: "May  8 05:28:01"
+			tsStr := fmt.Sprintf("%s %s %s %d", fields[0], fields[1], fields[2], currentYear)
+			timestamp, err2 = time.Parse("Jan _2 15:04:05 2006", tsStr)
+		}
+
+		if (err1 != nil && err2 != nil) || timestamp.Before(oneHourAgo) {
+			continue
+		}
+
+		parts := strings.Split(line, "SHA256:")
+		if len(parts) > 1 {
+			return "SHA256:" + strings.Fields(parts[1])[0]
 		}
 	}
+
 	return ""
 }

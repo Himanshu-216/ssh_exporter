@@ -31,8 +31,8 @@ var (
 
 	SSHConnectionsByFingerprint = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name: "ssh_connections_by_fingerprint",
-			Help: "SSH connection count by fingerprint",
+			Name: "ssh_active_sessions_by_fingerprint",
+			Help: "Active SSH sessions by user and SSH key fingerprint/comment",
 		},
 		[]string{"fingerprint"},
 	)
