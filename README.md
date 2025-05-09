@@ -18,7 +18,7 @@ make build
 docker pull himanshu162pnt723/ssh_exporter
 ```
 ```bash
-docker run --privileged -d --rm -p 9898:9898 himanshu162pnt723/ssh_exporter
+docker run --privilege -d --rm -p 9898:9898 himanshu162pnt723/ssh_exporter
 ```
 ## Features
 
@@ -28,7 +28,6 @@ docker run --privileged -d --rm -p 9898:9898 himanshu162pnt723/ssh_exporter
 - **Last Login Time**: Provides the last login time for each user (in Unix timestamp).
 - **Failed Logins by IP**: Tracks failed SSH login attempts by source IP address.
 - **Successful Logins by IP**: Tracks successful SSH login attempts by source IP address.
-- **Connections by Fingerprint**: Tracks the number of active SSH sessions by SSH key fingerprint.
 
 You can use these Prometheus queries to visualize and alert on SSH activity.
 
@@ -66,12 +65,6 @@ You can use these Prometheus queries to visualize and alert on SSH activity.
 
     ```promQL
     SSHSuccessfulLoginsByIP
-    ```
-
-- **Active sessions by fingerprint**:
-
-    ```promQL
-    ssh_connections_by_fingerprint
     ```
 
 ## Contributing

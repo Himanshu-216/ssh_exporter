@@ -29,14 +29,6 @@ var (
 		[]string{"user"},
 	)
 
-	SSHConnectionsByFingerprint = prometheus.NewGaugeVec(
-		prometheus.GaugeOpts{
-			Name: "ssh_active_sessions_by_fingerprint",
-			Help: "Active SSH sessions by user and SSH key fingerprint/comment",
-		},
-		[]string{"fingerprint"},
-	)
-
 	SSHFailedLoginsByIP = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name: "ssh_failed_logins_by_ip",
@@ -59,7 +51,6 @@ func RegisterMetrics() {
 	prometheus.MustRegister(SSHConnectionsByUser)
 	prometheus.MustRegister(SSHLoginsToday)
 	prometheus.MustRegister(LastLoginTime)
-	prometheus.MustRegister(SSHConnectionsByFingerprint)
 	prometheus.MustRegister(SSHFailedLoginsByIP)
 	prometheus.MustRegister(SSHSuccessfulLoginsByIP)
 }
