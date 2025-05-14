@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	listenAddress = flag.String("web.listen-address", "0.0.0.0:9898", "Address and port to expose metrics on (e.g., 0.0.0.0:9898)")
+	listenAddress = flag.String("web.listen-address", "0.0.0.0:9898", "Address and port to expose metrics on")
 	showVersion   = flag.Bool("version", false, "Print version information and exit")
 )
 
@@ -28,6 +28,7 @@ func main() {
 
 	metrics.RegisterMetrics()
 
+	// Update derived metrics periodically
 	go func() {
 		for {
 			metrics.UpdateSSHConnections()

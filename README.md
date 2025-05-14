@@ -18,7 +18,14 @@ make build
 docker pull himanshu162pnt723/ssh_exporter
 ```
 ```bash
-docker run --privilege -d --rm -p 9898:9898 himanshu162pnt723/ssh_exporter
+docker run --privileged --rm \
+  -p 9898:9898 \
+  -v /var/log/wtmp:/var/log/wtmp:ro \
+  -v /var/log/btmp:/var/log/btmp:ro \
+  -v /var/run/utmp:/var/run/utmp:ro \
+  -v /var/log/lastlog:/var/log/lastlog:ro \
+  -v /etc/passwd:/etc/passwd:ro \
+  himanshu162pnt723/ssh_exporter
 ```
 ## Features
 
